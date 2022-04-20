@@ -136,7 +136,7 @@ def estimator(X,y,clf1,clf2):
 min_ANN = ANN_[max(ANN_)]
 min_linear= linear[max(linear)]
 min_baseline = baseline[max(baseline)]
-y_cat = [np.argmax(x) for x in y_cat]
+y_cat = pd.DataFrame([np.argmax(x) for x in y_cat])
 print("ANN vs Logistic")
 estimator(X,y_cat,min_ANN,min_linear[1])
 print("Logistic vs Baseline")
