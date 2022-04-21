@@ -80,15 +80,6 @@ def ANN2(X_train,y_train,X_test,y_test,cv_inner,cv_outer,aux=0,k=0, h = False):
     # Measure this fold's RMSE
     score = np.sqrt(metrics.mean_squared_error(pred, y_test))
     print(f"Fold score (RMSE): {score}")
-    '''if not h:
-        k += 1
-        model.save('.\\regression_models_k\\model_k{}.h5'.format(k))
-    else:
-        aux += 1
-        if aux % 2 == 0:
-            k += 1
-        model.save('.\\regression_models_h\\model_h{}_{}.h5'.format(aux, k))
-    '''
     final_val[score] = model
     return final_val
 

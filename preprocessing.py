@@ -11,7 +11,6 @@ from matplotlib.pylab import (figure, semilogx, loglog, xlabel, ylabel, legend,
                               title, subplot, show, grid)
 from sklearn import model_selection
 
-#outliers 74, 183, 276
 pd.set_option('display.max_columns', None)
 def preprocess(df):
     #Drop several columns
@@ -56,7 +55,6 @@ def preprocess(df):
               G3 = column_to_move_3)
 
     df.insert(0, 'Offset', 1)
-    #df.reindex(df.columns.tolist(),axis=1)
     return df
 
 def calculateGrade(grade):
@@ -67,14 +65,12 @@ def calculateGrade(grade):
 
 df = preprocess(pd.read_csv(r'student-por.csv',";"))
 X = df.iloc[:,0:-3]
-#df with G1 and G2
-#X = df.iloc[:,0:-1]
+
 y = df.iloc[:,-1]
 
-#y = df.iloc[:,-1].apply(lambda x: calculateGrade(x))
+
 y_cat = to_categorical(df.iloc[:,-1].apply(lambda x: calculateGrade(x)))
-#y = LabelBinarizer().fit_transform(df.iloc[:,-1].apply(lambda x: calculateGrade(x)))
-#y = df.iloc[:,-1].apply(lambda x: calculateGrade(x))
+
 
 N, M = X.shape
 

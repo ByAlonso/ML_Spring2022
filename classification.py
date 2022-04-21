@@ -13,12 +13,6 @@ from tensorflow.keras.utils import to_categorical
 import sklearn.linear_model as lm
 from sklearn import metrics
 
-#1 explain that we have chosen to classify as a binary PAss / No pass, reason? It was easier and we thought it would be more accurate
-# as the results are not close to a normal distribution
-
-#2 we are gonna uuse h that are the numbers of hidden layers for the parameter in exercise 2
-
-#ANN
 cv_inner = KFold(n_splits=10, shuffle=True, random_state=1)
 cv_outer = KFold(n_splits=10, shuffle=True, random_state=1)
 def ANN(X_train,y_train,X_test,y_test,cv_inner,cv_outer,aux=0,k=0, h = False):
@@ -33,39 +27,12 @@ def ANN(X_train,y_train,X_test,y_test,cv_inner,cv_outer,aux=0,k=0, h = False):
     model.fit(X_train, y_train)
 
     pred = model.predict(X_test)
-    print(pred)
     # Measure this fold's RMSE
     score = accuracy_score(y_test, pred)
     print('Accuracy: {:.2f}'.format(score))
-    '''score = np.sqrt(metrics.mean_squared_error(pred, y_test))
-    print(f"Fold score (RMSE): {score}")'''
-    '''if not h:
-        k += 1
-        model.save('.\\regression_models_k\\model_k{}.h5'.format(k))
-    else:
-        aux += 1
-        if aux % 2 == 0:
-            k += 1
-        model.save('.\\regression_models_h\\model_h{}_{}.h5'.format(aux, k))
-    '''
+
     final_val[score] = model
-
-
-    '''y_labeled = [np.argmax(x) for x in y_test]
-    print(y_labeled)
-    #this would be nice to get but I am done with trying
-    fig = plot_confusion_matrix(model, X_test, pred)
-    fig.figure_.suptitle("Confusion Matrix for Winequality Dataset")
-    plt.show()'''
     return final_val
-
-    '''pred_train = model.predict(X_train)
-    scores = model.evaluate(X_train, y_train, verbose=0)
-    print('Accuracy on training data: {}% \n Error on training data: {}'.format(scores[1], 1 - scores[1]))
-
-    pred_test = model.predict(X_test)
-    scores2 = model.evaluate(X_test, y_test, verbose=0)
-    print('Accuracy on test data: {}% \n Error on test data: {}'.format(scores2[1], 1 - scores2[1]))'''
 
 def LogisticRegression(X_train,y_train,cv_inner,cv_outer):
 
